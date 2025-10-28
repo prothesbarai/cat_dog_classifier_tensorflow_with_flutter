@@ -1,4 +1,4 @@
-import 'package:cat_dog_classifier_tensorflow_with_flutter/pages/home_page.dart';
+import 'package:cat_dog_classifier_tensorflow_with_flutter/pages/splash_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),),
-      home: const HomePage(),
+      home: const MySplash(),
     );
   }
 }
