@@ -15,6 +15,12 @@ android {
         targetCompatibility = JavaVersion.VERSION_11
     }
 
+    // >>> Installation tflite purpose
+    aaptOptions {
+        noCompress 'tflite'
+        noCompress 'lite'
+    }
+
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_11.toString()
     }
