@@ -33,10 +33,12 @@ class _MySplashState extends State<MySplash> {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
-            Icon(Icons.flutter_dash, size: 100, color: Colors.white),
-            SizedBox(height: 20),
-            Text("Welcome to My App", style: TextStyle(color: Colors.white, fontSize: 22),),
+          children: [
+            const Text("Welcome to tensorflow", style: TextStyle(color: Colors.white, fontSize: 22),textAlign: TextAlign.center,),
+            const SizedBox(height: 20),
+            Image.asset('assets/logo/catdog_innner_logo.png',width: 150,),
+            const SizedBox(height: 20),
+            const Text("Cat & dog classification", style: TextStyle(color: Colors.white, fontSize: 22),textAlign: TextAlign.center,),
           ],
         ),
       ),
