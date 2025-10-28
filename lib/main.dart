@@ -13,7 +13,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),),
+      theme: ThemeData(
+        appBarTheme: AppBarThemeData(backgroundColor: Color(0xff004242),foregroundColor: Colors.white,elevation: 0,centerTitle: true,iconTheme: IconThemeData(color: Colors.white)),
+        elevatedButtonTheme: ElevatedButtonThemeData(style: ElevatedButton.styleFrom(foregroundColor: Colors.white,backgroundColor: Colors.brown,elevation: 3,iconColor: Colors.white,iconSize: 20,shape: RoundedRectangleBorder(borderRadius: BorderRadiusGeometry.all(Radius.circular(25))))),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+      ),
       home: const MySplash(),
     );
   }
