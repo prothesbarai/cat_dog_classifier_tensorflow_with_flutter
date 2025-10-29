@@ -50,8 +50,8 @@ android {
     // >>> Installation tflite purpose
     aaptOptions {
         noCompress("tflite")
+        noCompress("lite")
     }
-
 
     // >>> 16KB
     packaging {

@@ -31,10 +31,10 @@ dependencies:
   flutter:
     sdk: flutter
   image_picker: ^1.2.0
-  tflite_flutter: ^0.12.1
   image_cropper: ^11.0.0
   path_provider: ^2.1.5
   path: ^1.9.1
+  flutter_tensorflow_lite: ^1.0.3
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -61,6 +61,7 @@ flutter:
   assets:
     - 'assets/logo/catdog_innner_logo.png'
     - 'assets/models/model_unquant.tflite'
+    - 'assets/models/labels.txt'
 
 flutter_icons:
   android: true

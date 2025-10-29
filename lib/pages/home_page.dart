@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
@@ -42,6 +41,18 @@ class _HomePageState extends State<HomePage> {
 
   }
   /// <<< Image Pick Compressed And Action End Here ============================
+
+
+
+  /// >>> Detected Image =======================================================
+  Future<void> detectImage(File image) async {
+
+  }
+
+
+
+  /// <<< Detected Image =======================================================
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
