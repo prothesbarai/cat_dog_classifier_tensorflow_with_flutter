@@ -8,18 +8,13 @@ plugins {
 android {
     namespace = "com.prothes.cat_dog_classifier_tensorflow_with_flutter"
     compileSdk = flutter.compileSdkVersion
-    ndkVersion = flutter.ndkVersion
+    ndkVersion = "27.0.12077973"
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
 
-    // >>> Installation tflite purpose
-    aaptOptions {
-        noCompress 'tflite'
-        noCompress 'lite'
-    }
 
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_11.toString()
@@ -34,6 +29,13 @@ android {
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
+
+
+        // >> For 16KB
+        ndk {
+            abiFilters.addAll(listOf("armeabi-v7a", "arm64-v8a"))
+        }
+
     }
 
     buildTypes {
@@ -43,6 +45,25 @@ android {
             signingConfig = signingConfigs.getByName("debug")
         }
     }
+
+
+    // >>> Installation tflite purpose
+    aaptOptions {
+        noCompress("tflite")
+    }
+
+
+    // >>> 16KB
+    packaging {
+        jniLibs {
+            excludes += listOf("**/libcardioDecider.so", "**/libopencv_java4.so")
+        }
+        resources {
+            excludes += listOf("META-INF/LICENSE*", "META-INF/NOTICE*")
+        }
+    }
+
+
 }
 
 flutter {

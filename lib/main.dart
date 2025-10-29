@@ -2,6 +2,7 @@ import 'package:cat_dog_classifier_tensorflow_with_flutter/pages/splash_screen.d
 import 'package:flutter/material.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 

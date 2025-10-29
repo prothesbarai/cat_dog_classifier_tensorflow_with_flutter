@@ -1,6 +1,5 @@
 import 'package:cat_dog_classifier_tensorflow_with_flutter/pages/home_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_splash_screen/flutter_splash_screen.dart';
 
 class MySplash extends StatefulWidget {
   const MySplash({super.key});
@@ -18,8 +17,6 @@ class _MySplashState extends State<MySplash> {
   }
 
   Future<void> _initSplash() async{
-    // >>> Hide Native splash screen
-    FlutterSplashScreen.hide();
     await Future.delayed(const Duration(seconds: 3));
     if(!mounted) return;
     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage(),));
