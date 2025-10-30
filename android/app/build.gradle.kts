@@ -39,10 +39,13 @@ android {
     }
 
     buildTypes {
-        release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig = signingConfigs.getByName("debug")
+        getByName("release") {
+            isMinifyEnabled = true
+            isShrinkResources = false
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+        }
+        getByName("debug") {
+            isMinifyEnabled = false
         }
     }
 
@@ -68,4 +71,10 @@ android {
 
 flutter {
     source = "../.."
+}
+
+
+dependencies {
+    implementation("com.squareup.okhttp3:okhttp:4.9.3")
+    implementation("com.squareup.okio:okio:2.10.0")
 }
