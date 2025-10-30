@@ -1,9 +1,8 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter_tensorflow_lite/flutter_tensorflow_lite.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:path/path.dart' as path;
-import 'package:path_provider/path_provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -15,6 +14,17 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
 
 
+  List? _output;
+  bool isLoading = true;
+
+
+  @override
+  void initState() {
+    super.initState();
+    loadModel().then((value){
+      setState(() {});
+    });
+  }
 
 
 
@@ -35,23 +45,30 @@ class _HomePageState extends State<HomePage> {
       ]
     );
     if(croppedImage == null) return;
-    // Store Temporary Directory And With Compressed
-    final tempDir = await getTemporaryDirectory();
-    final tempPath = path.join(tempDir.path,"compressed_${DateTime.now().millisecondsSinceEpoch}.jpg");
 
+    setState(() {images = File(croppedImage.path);});
+    detectImage(images!);
   }
   /// <<< Image Pick Compressed And Action End Here ============================
 
 
 
   /// >>> Detected Image =======================================================
-  Future<void> detectImage(File image) async {
-
+  Future<void> detectImage(File images) async {
+    var output = await Tflite.runModelOnImage(path: images.path,numResults: 2,threshold: 0.6,imageMean: 127.5,imageStd: 127.5);
+    if(!mounted) return;
+    setState(() {_output = output;isLoading = false;});
   }
-
-
-
   /// <<< Detected Image =======================================================
+
+
+  /// >>> Load Model ===========================================================
+  Future<void> loadModel() async{
+    await Tflite.loadModel(model: "assets/models/model_unquant.tflite",labels: "assets/models/labels.txt");
+  }
+  /// <<< Load Model ===========================================================
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -73,8 +90,11 @@ class _HomePageState extends State<HomePage> {
               const SizedBox(height: 40),
 
               // Image Section
-              Expanded(child: Center(child: Image.asset("assets/logo/catdog_innner_logo.png", width: double.infinity, height: 250, fit: BoxFit.contain,),),),
+              isLoading?
+              Expanded(child: Center(child: Image.asset("assets/logo/catdog_innner_logo.png", width: double.infinity, height: 250, fit: BoxFit.contain,),),):
+              Expanded(child: Center(child: Image.file(images!, width: double.infinity, height: 250, fit: BoxFit.contain,),),),
 
+              _output != null ? Center(child: Text("${_output?[0]['label']}",style: TextStyle(color: Colors.white),)) : Center(child: Text("data",style: TextStyle(color: Colors.white),)),
               // Bottom Buttons
               Padding(
                 padding: const EdgeInsets.only(bottom: 30.0),
