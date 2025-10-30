@@ -92,9 +92,11 @@ class _HomePageState extends State<HomePage> {
               // Image Section
               isLoading?
               Expanded(child: Center(child: Image.asset("assets/logo/catdog_innner_logo.png", width: double.infinity, height: 250, fit: BoxFit.contain,),),):
-              Expanded(child: Center(child: Image.file(images!, width: double.infinity, height: 250, fit: BoxFit.contain,),),),
+              Expanded(child: Center(child: ClipRRect(borderRadius : BorderRadius.circular(20),child: Image.file(images!, width: double.infinity, height: 250, fit: BoxFit.cover,)),),),
 
-              _output != null ? Center(child: Text("${_output?[0]['label']}",style: TextStyle(color: Colors.white),)) : Center(child: Text("data",style: TextStyle(color: Colors.white),)),
+              // ${_output?[0]['label']}\n${_output?[0]['confidence']}
+              _output != null ? Center(child: Text("This is a ${_output?[0]['label']}",style: TextStyle(color: Colors.white,fontSize: 20,fontWeight: FontWeight.bold),)) : SizedBox.shrink(),
+              SizedBox(height: 20,),
               // Bottom Buttons
               Padding(
                 padding: const EdgeInsets.only(bottom: 30.0),
